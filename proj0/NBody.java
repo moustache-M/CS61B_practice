@@ -25,4 +25,29 @@ public class NBody {
         }
         return Planets;
     }
+
+    public static void main(String[] args) {
+        double T, dt, radius;
+        Planet[] Planets = new Planet[5];
+        String filename;
+        String imgBackGround = "images/starfield.jpg";
+
+        T = Double.parseDouble(args[0]);
+        dt = Double.parseDouble(args[1]);
+        filename = args[2];
+        radius = readRadius(filename);
+        Planets = readPlanets(filename); 
+
+        /** sets up the universe from
+         * -radius, -radius up to radius, radius */
+        StdDraw.setScale(-radius, radius);
+        StdDraw.clear();
+        StdDraw.picture(0, 0, imgBackGround);
+        StdDraw.show();
+        StdDraw.pause(2000);
+
+        for(Planet p: Planets) {
+            p.draw();
+        }
+    }
 }
