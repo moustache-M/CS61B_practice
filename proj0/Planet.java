@@ -3,8 +3,9 @@ public class Planet {
     public double yyPos;       // Planet's current y position
     public double xxVel;       // Planet's current velocity in the x direction
     public double yyVel;       // Planet's current velocity in the y direction
-    public double mass;        // Planet's mass
+    public double mass;   
     public String imgFileName; // The name of file corresponds to the image of the plane
+    static final double G = 6.67e-11;  // the gravitational constant
 
     /** initialize an instance of the Planet class */
     public Planet(double xP, double yP, double xV, double yV, double m, String img) {
@@ -50,6 +51,27 @@ public class Planet {
             r = (right+left) / 2.0;
         }
         return r;
+    }
+
+    /** calculate the force exerted on this planet by the given planet */
+    public double calcForceExertedBy(Planet p) {
+        double force;
+        force = G * (p.mass * this.mass) / (this.calcDistance(p) * this.calcDistance(p));
+        return force;
+    }
+
+    /** calculate the force exerted in the X and Y directions */
+    public double calcForceExertedByX(Planet p) {
+        double ForceX;
+
+        ForceX = this.calcForceExertedBy(p) * (p.xxPos-this.xxPos) / this.calcDistance(p);
+        return ForceX;
+    }
+    public double calcForceExertedByY(Planet p) {
+        double ForceY;
+
+        ForceY = this.calcForceExertedBy(p) * (p.yyPos-this.yyPos) / this.calcDistance(p);
+        return ForceY;
     }
 }
 
