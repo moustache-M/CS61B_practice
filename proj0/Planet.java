@@ -25,5 +25,31 @@ public class Planet {
         mass = p.mass;
         imgFileName = p.imgFileName;
     }
+
+    /** calculates the distance between two Planets */
+    public double calcDistance(Planet p) {
+        double r, dx, dy, SquareD, left, right, error = 0.00001;
+
+        dx = p.xxPos - this.xxPos; 
+        dy = p.yyPos - this.yyPos; 
+        dx = dx > 0.0 ? dx : -dx;      // distance should be positive or 0
+        dy = dy > 0.0 ? dy : -dy;
+
+        SquareD = dx*dx + dy*dy;
+        right = SquareD;
+        left = 0.0;
+        r = (right+left) / 2.0;
+        while (right != left) {
+            if (r*r > SquareD) {
+                right = r;
+            } else if (SquareD - r*r > error) {
+                left = r;
+            } else {
+                break;
+            } 
+            r = (right+left) / 2.0;
+        }
+        return r;
+    }
 }
 
