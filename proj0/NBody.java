@@ -28,6 +28,7 @@ public class NBody {
 
     public static void main(String[] args) {
         double T, dt, radius;
+        In in;
         Planet[] Planets = new Planet[5];
         String filename;
         String imgBackGround = "images/starfield.jpg";
@@ -35,19 +36,37 @@ public class NBody {
         T = Double.parseDouble(args[0]);
         dt = Double.parseDouble(args[1]);
         filename = args[2];
+        in = new In(filename);
         radius = readRadius(filename);
         Planets = readPlanets(filename); 
 
         /** sets up the universe from
          * -radius, -radius up to radius, radius */
         StdDraw.setScale(-radius, radius);
-        StdDraw.clear();
         StdDraw.picture(0, 0, imgBackGround);
-        StdDraw.show();
-        StdDraw.pause(2000);
 
-        for(Planet p: Planets) {
-            p.draw();
+        StdDraw.enableDoubleBuffering();
+        for (int time = 0; time < T; time += dt) {
+            double[] xForce = new double[Planets.length];
+            double[] yForce = new double[Planets.length];
+            for (int i = 0; i < Planets.length; i++) {
+                xForce[i] = Planets[i].calcNetForceExertedByX(Planets);
+                yForce[i] = Planets[i].calcNetForceExertedByY(Planets);
+            }
+            for (int i = 0; i < Planets.length; i++) {
+                Planets[i].update(dt, xForce[i], yForce[i]);
+            }
+            StdDraw.clear();
+            StdDraw.picture(0, 0, imgBackGround);
+            for (Planet p: Planets) {
+                p.draw();
+            }
+            StdDraw.show();
+            StdDraw.pause(3);
         }
+
+        System.out.println(in.readAll());
     }
+
+
 }
