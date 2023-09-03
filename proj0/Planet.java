@@ -5,7 +5,7 @@ public class Planet {
     public double yyVel;       // Planet's current velocity in the y direction
     public double mass;   
     public String imgFileName; // The name of file corresponds to the image of the plane
-    static final double G = 6.67e-11;  // the gravitational constant
+    private static final double G = 6.67e-11;  // the gravitational constant
 
     /** initialize an instance of the Planet class */
     public Planet(double xP, double yP, double xV, double yV, double m, String img) {
