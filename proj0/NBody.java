@@ -58,8 +58,8 @@ public class NBody {
             }
             StdDraw.clear();
             StdDraw.picture(0, 0, imgBackGround);
-            for (Planet p: Planets) {
-                p.draw();
+            for (int i = 0; i < Planets.length; i++) {
+                Planets[i].draw();
             }
             StdDraw.show();
             StdDraw.pause(3);
