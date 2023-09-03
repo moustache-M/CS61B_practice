@@ -12,7 +12,7 @@ public class NBody {
     public static Planet[] readPlanets(String FileName) {
         In in = new In(FileName);
         int PlanetsNumber = in.readInt();
-        Planet Planets[] = new Planet[PlanetsNUmber] ;
+        Planet Planets[] = new Planet[PlanetsNumber] ;
         double PlanetsRadius = in.readDouble();
         for(int i = 0; i < PlanetsNumber; i++) {
             double xxPos = in.readDouble();
@@ -46,6 +46,8 @@ public class NBody {
         StdDraw.picture(0, 0, imgBackGround);
 
         StdDraw.enableDoubleBuffering();
+
+        /** create animation */
         for (int time = 0; time < T; time += dt) {
             double[] xForce = new double[Planets.length];
             double[] yForce = new double[Planets.length];
@@ -53,6 +55,8 @@ public class NBody {
                 xForce[i] = Planets[i].calcNetForceExertedByX(Planets);
                 yForce[i] = Planets[i].calcNetForceExertedByY(Planets);
             }
+
+            /** Updating all Planets must be after xForce and yForce are stored */
             for (int i = 0; i < Planets.length; i++) {
                 Planets[i].update(dt, xForce[i], yForce[i]);
             }
