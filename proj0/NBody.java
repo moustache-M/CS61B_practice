@@ -4,17 +4,17 @@ public class NBody {
     public static double readRadius(String FileName) {
         In in = new In(FileName);
         int PlanetsNumber = in.readInt();
-        double PlanetsRadius = in.readDouble();
-        return PlanetsRadius;
+        double UniverseRadius = in.readDouble();
+        return UniverseRadius;
     }
 
     /** return an array of Planets corresponding to the planets in the file */
     public static Planet[] readPlanets(String FileName) {
         In in = new In(FileName);
-        Planet Planets[] = new Planet[5] ;
         int PlanetsNumber = in.readInt();
+        Planet Planets[] = new Planet[PlanetsNUmber] ;
         double PlanetsRadius = in.readDouble();
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < PlanetsNumber; i++) {
             double xxPos = in.readDouble();
             double yyPos = in.readDouble();
             double xxVel = in.readDouble();
