@@ -29,7 +29,7 @@ public class Planet {
 
     /** calculates the distance between two Planets */
     public double calcDistance(Planet p) {
-        double r, dx, dy, SquareD, left, right, error = 0.00001;
+        double r, dx, dy, SquareD, left, right, error = 0.01;
 
         dx = p.xxPos - this.xxPos; 
         dy = p.yyPos - this.yyPos; 
@@ -40,7 +40,7 @@ public class Planet {
         right = SquareD;
         left = 0.0;
         r = (right+left) / 2.0;
-        while (right != left) {
+        while (right - left > error) {
             if (r*r > SquareD) {
                 right = r;
             } else if (SquareD - r*r > error) {
@@ -104,5 +104,9 @@ public class Planet {
         this.xxPos = this.xxPos + dt * this.xxVel;
         this.yyPos = this.yyPos + dt * this.yyVel;
     }
+
+    public void draw() {
+        StdDraw.picture(xxPos, yyPos, "images/"+imgFileName);
+    }  
 }
 
